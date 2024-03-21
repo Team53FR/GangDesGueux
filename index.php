@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chaîne Twitch - Accueil</title>
+<title>GangDesGueux</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
     } 
     else 
     {
-        include 'accueil.php'; // Page par défaut
+        include 'Vue/accueil.php'; // Page par défaut
     }
     ?>
 </main>

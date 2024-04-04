@@ -88,10 +88,35 @@
 </div>	
 
 
+
 <!-- Activité Section-->
 <section id="features" class="bg-white">
     <div class="container">
         <div class="section-content">
+            
+            <div align="center">
+
+                <iframe
+                    src="https://player.twitch.tv/?collection=abcDeF1ghIJ2kL&parent=streamernews.example.com"
+                    height="480"
+                    width="854"
+                    allowfullscreen>
+                </iframe>
+
+                <div id="twitch-embed"></div>
+                
+                <script src="https://embed.twitch.tv/embed/v1.js"></script>
+                
+                <script type="text/javascript">
+                    new Twitch.Embed("twitch-embed", 
+                    {
+                        width: 854,
+                        height: 480,
+                        channel: "GangDesGueux"
+                    });
+                </script>
+            </div>
+
 
             <div class="title-wrap mb-5" >
                 <h2 class="section-title">
@@ -101,8 +126,7 @@
             </div>
             
             
-            <div class="row">
-                
+            <div class="row">                
                 <div class="col-md-10 offset-md-1 features-holder">
                     <div class="row">
                         
@@ -158,8 +182,7 @@
                         </div>
                         
                     </div>
-                </div>
-                
+                </div>                
             </div>
 
             <div class="title-wrap">

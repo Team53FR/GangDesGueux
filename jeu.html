@@ -100,15 +100,14 @@
 <!-- Présentation du jeu Section-->
 <section id="features" class="bg-white">
     <div class="container">
-        <div class="section-content">
-            
-  
-                <h1>Clicker Baguette</h1>
+        <div class="section-content">                    
 
-                <p>Click sur la zone ci-dessous pour augmenter ton score :</p>
+            <div class="title-wrap mb-5" >
 
-                
-            
+                <h2 class="section-title">Clicker Baguette</h2>
+                <br>
+                <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit" onclick="resetGame()">Réinitialiser</button>
+            </div>
             
         </div>
     </div>
@@ -122,19 +121,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row align-items-center text-white">
+                        
                         <div class="col-md-12 text-center">
+                            <p class="section-sub-title">Click sur la zone ci-dessous pour augmenter ton score :</p>
                             <div id="clickArea">
-                                <a class="btn btn-outline-primary btn-lg" style="color: white;">Cliquez ici</a>
+                                <a class="btn btn-outline-primary btn-lg" >Cliquez ici</a>
                             </div>
                             
                             <p id="score">Score: <span id="scoreValue">0</span></p>
                  
-                            <script src="js/script.js"></script>
-                        </div>
-                        <div class="col-md-4 offset-md-2 col-sm-6" >
-                            
-                        </div>
 
+                            
+
+                        </div>                       
+                        
                     </div>
                 </div>
             </div>
@@ -146,14 +146,82 @@
 <section id="features" class="bg-white">
     <div class="container">
         <div class="section-content">
-            
-  
-                <h1>Clicker Game</h1>
-                <p>Click sur la zone ci-dessous pour augmenter ton score :</p>
+                       
+            <h2 class="section-title" align="center">Amélioration</h2>
+            <br>
+            <p class="section-sub-title" align="center">Ci-dessous vous pourrez trouvez des améliorations :</p>
 
+            <br><br>
                 
-            
-            
+                <div class="col-md-10 offset-md-1 features-holder">
+                    <div class="row">
+                        
+                        <div class="col-md-4 col-sm-12 text-center mt-4">
+                            <div class="shadow rounded feature-item p-4 mb-4" ="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-user fs-40"></i>
+                                </div>
+                                <p id="autoClickers">Auto Clickers: <span id="autoClickersValue">0</span></p>
+                                <button class="btn btn-primary btn-shadow btn-lg" id="autoClickerButton" type="submit" name="submit" onclick="buyAutoClicker()">Auto Clicker (10 points)</button>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-earth fs-40"></i>
+                                </div>
+                                <h4>MMO</h4>
+                                <p>Ça nous arrive de faire des MMO, les derniers en date Blade and Soul, Guild wars 2, Teso.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded feature-item p-4 mb-4" >
+                                <div class="my-4">
+                                    <i class="lnr lnr-users fs-40"></i>
+                                </div>
+                                <p id="clickMultiplier">Click Multiplier: <span id="clickMultiplierValue">1</span></p>
+                                <button class="btn btn-primary btn-shadow btn-lg" id="clickMultiplierButton" type="submit" name="submit" onclick="buyClickMultiplier()">Multiplier (50 points)</button>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-code fs-40"></i>
+                                </div>
+                                <h4>Game Dev</h4>
+                                <p>Des lives développement de divers jeux, si vous voulez papoter de ce domaine, vous êtes le bienvenu !</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-12 text-center mt-4">
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-eye fs-40"></i>
+                                </div>
+                                <h4>VR</h4>
+                                <p>Et oui on fait de la VR et de tout ! Comme Beat Saber, VRchat, Half-Life Alyx...</p>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-pencil fs-40"></i>
+                                </div>
+                                <h4>ART</h4>
+                                <p>De temps en temps, de l'infographie 2D/3D, ou même quelque emotes</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <br><br>
+
+                <div class="col-md-12 text-center">
+                    <h2 class="section-title" align="center">Objectifs</h2>
+                    <div id="goals-container">
+                        <div id="goal-list"></div>
+                        <div id="progress-bars"></div>
+                    </div>
+                </div>
+                
+                <script src="js/script.js"></script>
+                        
         </div>
     </div>
 </section>

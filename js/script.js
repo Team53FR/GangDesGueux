@@ -72,8 +72,18 @@ function buyAutoClicker() {
         clearInterval(autoClickInterval);
         autoClickInterval = setInterval(autoClick, 2000);
         updateButtonPrices();
-    } else {
-        alert('Vous n\'avez pas assez de points !');
+    } 
+
+    score = parseInt(localStorage.getItem('score')) || 0;
+
+    updateScore();
+    updateAutoClickers();
+    updateClickMultiplier();
+    updateButtonPrices();
+    updateGoalList();
+    
+    if (autoClickers > 0) {
+        autoClickInterval = setInterval(autoClick, 2000);
     }
     
     updateScore();
@@ -100,9 +110,20 @@ function buyClickMultiplier() {
         saveScore();
         localStorage.setItem('clickMultiplier', clickMultiplier);
         updateButtonPrices();
-    } else {
-        alert('Vous n\'avez pas assez de points !');
+    } 
+
+    score = parseInt(localStorage.getItem('score')) || 0;
+
+    updateScore();
+    updateAutoClickers();
+    updateClickMultiplier();
+    updateButtonPrices();
+    updateGoalList();
+    
+    if (autoClickers > 0) {
+        autoClickInterval = setInterval(autoClick, 2000);
     }
+
     updateGoalList();
 }
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
-        GangDesGueux
+        GangDesGueux - Clicker Baguette
     </title>
     <meta name="description">
     
@@ -72,7 +72,7 @@
 <!-- Banniere-->
 <div class="jumbotron d-flex align-items-center">
   <div class="container text-center">
-    <h1 class="display-1 mb-4">GDG</h1>
+    <h1 class="display-1 mb-4">Clicker Baguette</h1>
   </div>
   <div class="rectangle-1"></div>
   <div class="rectangle-2"></div>
@@ -97,103 +97,19 @@
 
 
 
-<!-- Activité Section-->
+<!-- Présentation du jeu Section-->
 <section id="features" class="bg-white">
     <div class="container">
         <div class="section-content">
             
+  
+                <h1>Clicker Baguette</h1>
 
-            <!-- Fenetre Stream Section
-            <div align="center">
-                <div id="twitch-embed"></div>                
-                <script src="https://embed.twitch.tv/embed/v1.js"></script>
+                <p>Click sur la zone ci-dessous pour augmenter ton score :</p>
+
                 
-                <script type="text/javascript">
-                    new Twitch.Embed("twitch-embed", 
-                    {
-                        width: 854,
-                        height: 480,
-                        channel: "GangDesGueux"
-                    });
-                </script>
-            </div>-->
-            
-
-            <div class="title-wrap mb-5" >
-                <h2 class="section-title">
-                    Que faisons-nous ?
-                </h2>
-                <p class="section-sub-title">Et oui "nous ", car on est deux, Shin et moi-même. ( GangDesGueux, TeamTeam, baguette..... et plein d'autres ) <br> Bref voici nos genres d'activité</p>
-            </div>
             
             
-            <div class="row">                
-                <div class="col-md-10 offset-md-1 features-holder">
-                    <div class="row">
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" ="fade-up">
-                                <div class="my-4">
-                                    <i class="lnr lnr-user fs-40"></i>
-                                </div>
-                                <h4>Solo</h4>
-                                <p>Des petits jeux solo pour des let's play chill, comme par exemple Avatar, Stray, Kena...</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-earth fs-40"></i>
-                                </div>
-                                <h4>MMO</h4>
-                                <p>Ça nous arrive de faire des MMO, les derniers en date Blade and Soul, Guild wars 2, Teso.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center">
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-users fs-40"></i>
-                                </div>
-                                <h4>Multi</h4>
-                                <p>Des jeux avec les copains pour plus de fun, sur tout et n'importe quel jeu, humour garantit !</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-code fs-40"></i>
-                                </div>
-                                <h4>Game Dev</h4>
-                                <p>Des lives développement de divers jeux, si vous voulez papoter de ce domaine, vous êtes le bienvenu !</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-eye fs-40"></i>
-                                </div>
-                                <h4>VR</h4>
-                                <p>Et oui on fait de la VR et de tout ! Comme Beat Saber, VRchat, Half-Life Alyx...</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-pencil fs-40"></i>
-                                </div>
-                                <h4>ART</h4>
-                                <p>De temps en temps, de l'infographie 2D/3D, ou même quelque emotes</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>                
-            </div>
-
-            <div class="title-wrap">
-                <br>
-                <h2 class="section-title">Plus <b>d'Info</b> ?</h2>
-                <p class="section-sub-title">Si vous voulez en savoir plus, nous vous invitons à vous renseigner dans "À Propos" !</p>
-                <br>
-                <a class="btn btn-link" href="about.html" role="button">À PROPOS</a>
-            </div>
-
         </div>
     </div>
 </section>
@@ -206,15 +122,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row align-items-center text-white">
-
-                        <div class="col-md-4 offset-md-2 col-sm-6" >
-                            <h4 class="mb-4">Et oui ! Nous avons <b>Discord</b> !</h4>
-                            <p>Venez nous rejoindre pour ne rater aucune information et évidemment vous éclater avec nous !</p>
-                            <a class="btn btn-outline-primary btn-lg" href="https://discord.gg/vn3BzcnD9M">DISCORD</a>
+                        <div class="col-md-12 text-center">
+                            <div id="clickArea">
+                                <a class="btn btn-outline-primary btn-lg" style="color: white;">Cliquez ici</a>
+                            </div>
+                            
+                            <p id="score">Score: <span id="scoreValue">0</span></p>
+                 
+                            <script src="js/script.js"></script>
                         </div>
-
-                        <div class="col-md-4 offset-md-right-2 col-sm-6" >
-                            <img class="my-5" src="img/discord.png" alt="">
+                        <div class="col-md-4 offset-md-2 col-sm-6" >
+                            
                         </div>
 
                     </div>
@@ -224,22 +142,21 @@
     </div>
 </section>	
 
-
-<!-- Affiliation Section-->
-<section id="portfolio" class="bg-white">
+<!-- Activité Section-->
+<section id="features" class="bg-white">
     <div class="container">
         <div class="section-content">
-            <div class="title-wrap">
-                <h2 class="section-title">Notre <b>Superbe</b> Annonce</h2>
-                <p class="section-sub-title">Nous avons le plaisir de vous annoncez que nous sommes affiliés à quelques marques, alors si ça vous intéresse n'hésiter pas à aller voir !</p>
-                <br>
-                <a class="btn btn-link" href="affiliation.html" role="button">AFFILIATION</a>
-            </div>
+            
+  
+                <h1>Clicker Game</h1>
+                <p>Click sur la zone ci-dessous pour augmenter ton score :</p>
+
+                
+            
             
         </div>
     </div>
 </section>
-
 
 <!-- Twitch Section-->
 <section id="cta" class="bg-fixed overlay" style="background-image: url(img/bg.jpg);">

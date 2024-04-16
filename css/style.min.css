@@ -25,6 +25,19 @@ h6,
   font-family: 'Work Sans', sans-serif;
   margin-top: 0; }
 
+  #score {
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+  #clickArea {
+      display: inline-block;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+  }
+
 a {
   color: #ff00cc;
   transition: all .3s ease-in-out; }

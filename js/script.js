@@ -66,12 +66,8 @@ function updateButtonPrices() {
 function buyAutoClicker() {
     let price = Math.floor(autoClickerBasePrice * Math.pow(autoClickerPriceMultiplier, autoClickers));
     if (score >= price) {
-        updateGoalList();
         score -= price;
         autoClickers++;
-        updateScore();
-        updateAutoClickers();
-        saveScore();
         localStorage.setItem('autoClickers', autoClickers);
         clearInterval(autoClickInterval);
         autoClickInterval = setInterval(autoClick, 2000);
@@ -79,6 +75,11 @@ function buyAutoClicker() {
     } else {
         alert('Vous n\'avez pas assez de points !');
     }
+    
+    updateScore();
+    updateAutoClickers();
+    saveScore();
+    updateGoalList();
 }
 
 function autoClick() {
@@ -91,7 +92,6 @@ function autoClick() {
 function buyClickMultiplier() {
     let price = Math.floor(clickMultiplierBasePrice * Math.pow(clickMultiplierPriceMultiplier, clickMultiplier - 1));
     if (score >= price) {
-        updateGoalList();
         score -= price;
         clickMultiplier++;
         autoClickerValue *= 2;
@@ -103,6 +103,7 @@ function buyClickMultiplier() {
     } else {
         alert('Vous n\'avez pas assez de points !');
     }
+    updateGoalList();
 }
 
 updateButtonPrices();
@@ -145,6 +146,8 @@ function resetGame() {
     clickMultiplier = 1;
     autoClickerValue = 1;
     updateScore();
+    updateButtonPrices();
+    updateGoalList();
     updateAutoClickers();
     updateClickMultiplier();
     saveScore();
@@ -155,9 +158,8 @@ function resetGame() {
     goals.forEach(goal => {
         goal.completed = false; // Réinitialiser l'état des objectifs
     });
-    updateScore();
-    updateGoalList();
     clearGoalsLocalStorage(); // Effacer les objectifs du stockage local
+    updateGoalList();
 }
 
 
@@ -217,7 +219,7 @@ function updateGoalList() {
     goalsContainer.innerHTML = ""; // Effacer le contenu actuel du conteneur
 
     goals.forEach((goal, index) => {
-        // Créer un élément li pour l'objectif
+        // Créer un élément li pour l'objectif                   
         const goalItem = document.createElement('li');
         goalItem.innerHTML = `${goal.description} - <strong>${goal.completed ? "Accompli" : "En cours"}</strong>`;
         goalsContainer.appendChild(goalItem); // Ajouter l'élément li à la liste d'objectifs
@@ -252,3 +254,11 @@ function updateGoalList() {
     });
 }
 
+
+/*
+
+- Quand on clique sur les bouton d'amélioration sa doit actualiser les bar de progression
+- Le "Click Multiplier" multiplie que les points au clic et pas au "Auto Clickers"
+- Au restart remettre les bon coût au bouton amélioration
+
+*/

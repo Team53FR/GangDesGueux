@@ -11,6 +11,7 @@
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <!-- External CSS -->
     <link rel="icon" href="img/Logo.ico" type="image/x-icon">
@@ -19,7 +20,9 @@
     <link rel="stylesheet" href="vendor/select2/select2.min.css">
     <link rel="stylesheet" href="vendor/owlcarousel/owl.carousel.min.css">
     <link rel="stylesheet" href="vendor/lightcase/lightcase.css">
-     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="shortcut icon" href="ccs/TemplateData/favicon.ico">
+    <link rel="stylesheet" href="ccs/TemplateData/style.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
@@ -102,132 +105,142 @@
 
 <!-- Présentation du jeu Section-->
 <section id="features" class="bg-white">
-    <div class="container">
-        <div class="section-content">                    
-
-            <div class="title-wrap mb-5" >
-
-                <h2 class="section-title">Clicker Baguette</h2>
-                <br>
-                <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit" onclick="resetGame()">Réinitialiser</button>
-            </div>
-            
-        </div>
-    </div>
+    
 </section>
-
-
-<!-- Discord Section-->
-<section id="section-featurettes" class="featurettes overlay bg-fixed" style="background-image: url(img/hexa.jpg);">
-    <div class="container">
-        <div class="section-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row align-items-center text-white">
-                        
-                        <div class="col-md-12 text-center">
-                            <p class="section-sub-title">Click sur la zone ci-dessous pour augmenter ton score :</p>
-                            <div id="clickArea">
-                                <a class="btn btn-outline-primary btn-lg" >Cliquez ici</a>
-                            </div>
-                            
-                            <p id="score">Score: <span id="scoreValue">0</span></p>
-                 
-
-                            
-
-                        </div>                       
-                        
-                    </div>
-                </div>
-            </div>
+<div id="unity-container" class="unity-desktop">
+      <script>
+        var gameInstance = UnityLoader.instantiate("unityContainer", "Build/build.json", {onProgress: UnityProgress});
+    </script>
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
         </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">GIF_Creator</div>
+      </div>
     </div>
-</section>	
+<script>
 
-<!-- Activité Section-->
-<section id="features" class="bg-white">
-    <div class="container">
-        <div class="section-content">
-                       
-            <h2 class="section-title" align="center">Amélioration</h2>
-            <br>
-            <p class="section-sub-title" align="center">Ci-dessous vous pourrez trouvez des améliorations :</p>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
 
-            <br><br>
-                
-                <div class="col-md-10 offset-md-1 features-holder">
-                    <div class="row">
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" ="fade-up">
-                                <div class="my-4">
-                                    <i class="lnr lnr-user fs-40"></i>
-                                </div>
-                                <p id="autoClickers">Auto Clickers: <span id="autoClickersValue">0</span></p>
-                                <button class="btn btn-primary btn-shadow btn-lg" id="autoClickerButton" type="submit" name="submit" onclick="buyAutoClicker()">Auto Clicker (10 points)</button>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-earth fs-40"></i>
-                                </div>
-                                <h4>MMO</h4>
-                                <p>Ça nous arrive de faire des MMO, les derniers en date Blade and Soul, Guild wars 2, Teso.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center">
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-users fs-40"></i>
-                                </div>
-                                <p id="clickMultiplier">Click Multiplier: <span id="clickMultiplierValue">1</span></p>
-                                <button class="btn btn-primary btn-shadow btn-lg" id="clickMultiplierButton" type="submit" name="submit" onclick="buyClickMultiplier()">Multiplier (50 points)</button>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-code fs-40"></i>
-                                </div>
-                                <h4>Game Dev</h4>
-                                <p>Des lives développement de divers jeux, si vous voulez papoter de ce domaine, vous êtes le bienvenu !</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-eye fs-40"></i>
-                                </div>
-                                <h4>VR</h4>
-                                <p>Et oui on fait de la VR et de tout ! Comme Beat Saber, VRchat, Half-Life Alyx...</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-pencil fs-40"></i>
-                                </div>
-                                <h4>ART</h4>
-                                <p>De temps en temps, de l'infographie 2D/3D, ou même quelque emotes</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
 
-                <br><br>
+      function OpenFilePanel() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'video/*'; // Accepte uniquement les fichiers vidéo
+            input.onchange = function (e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (readerEvent) {
+                        var fileData = readerEvent.target.result;
+                        // Passez le chemin (ou le contenu) du fichier à Unity
+                        SendMessage('GameManager', 'OnFileSelected', fileData);
+                    }
+                    reader.readAsDataURL(file); // Ou `readAsArrayBuffer` si vous voulez juste le buffer
+                }
+            };
+            input.click();
+        }
 
-                <div class="col-md-12 text-center">
-                    <h2 class="section-title" align="center">Objectifs</h2>
-                    <div id="goals-container">
-                        <div id="goal-list"></div>
-                        <div id="progress-bars"></div>
-                    </div>
-                </div>
-                
-                <script src="js/script.js"></script>
-                        
-        </div>
-    </div>
-</section>
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Build WebGL.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Build WebGL.data.br",
+        frameworkUrl: buildUrl + "/Build WebGL.framework.js.br",
+        codeUrl: buildUrl + "/Build WebGL.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "INOD",
+        productName: "GIF_Creator",
+        productVersion: "1.0",
+        showBanner: unityShowBanner,
+      };
+
+      // By default, Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+              }).then((unityInstance) => {
+                loadingBar.style.display = "none";
+                fullscreenButton.onclick = () => {
+                  unityInstance.SetFullscreen(1);
+                };
+              }).catch((message) => {
+                alert(message);
+              });
+            };
+
+      document.body.appendChild(script);
+
+    </script>
+	
 
 <!-- Twitch Section-->
 <section id="cta" class="bg-fixed overlay" style="background-image: url(img/bg.jpg);">

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        GangDesGueux - Clicker Baguette
+    </title>
+    <meta name="description">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- External CSS -->
+    <link rel="icon" href="img/Logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/Logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" href="vendor/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/lightcase/lightcase.css">
+     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- Modernizr JS for IE8 support of HTML5 elements and media queries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+</head>
+
+
+<!-- Header-->
+<body class="static-layout">
+	<nav id="header-navbar" class="navbar navbar-expand-lg py-4">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center text-white" href="index.html">
+            <h3 class="font-weight-bolder mb-0">GangDesGueux</h3>
+        </a>
+        <button class="navbar-toggler" type="button" aria-controls="navbar-nav-header" aria-expanded="false" aria-label="Toggle navigation" data-toggle="collapse" data-target="#navbar-nav-header" >
+            <span class="lnr lnr-menu"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-nav-header">
+            <ul class="navbar-nav ml-auto" align="right">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">À Propos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="affiliation.html">Affiliation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="jeu.html">Jeu</a>
+                </li>
+                <li class="nav-item" hidden>
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+<!-- Banniere-->
+<div class="jumbotron jumbotron-single d-flex align-items-center">
+    <div class="container text-center">
+      <h1 class="display-2 mb-4">Clicker Baguette</h1>
+    </div>
+    <div class="rectangle-1"></div>
+    <div class="rectangle-2"></div>
+    <div class="rectangle-transparent-1"></div>
+    <div class="rectangle-transparent-2"></div>
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+    <div class="circle-3"></div>
+    <div class="triangle triangle-1">
+        <img src="img/obj_triangle.png" alt="">
+    </div>
+    <div class="triangle triangle-2">
+        <img src="img/obj_triangle.png" alt="">
+    </div>
+    <div class="triangle triangle-3">
+        <img src="img/obj_triangle.png" alt="">
+    </div>
+    <div class="triangle triangle-4">
+        <img src="img/obj_triangle.png" alt="">
+    </div>
+  </div>
+
+
+
+<!-- Présentation du jeu Section-->
+<section id="features" class="bg-white">
+    <div class="container">
+        <div class="section-content">                    
+
+            <div class="title-wrap mb-5" >
+
+                <h2 class="section-title">Clicker Baguette</h2>
+                <br>
+                <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit" onclick="resetGame()">Réinitialiser</button>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+<!-- Discord Section-->
+<section id="section-featurettes" class="featurettes overlay bg-fixed" style="background-image: url(img/hexa.jpg);">
+    <div class="container">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row align-items-center text-white">
+                        
+                        <div class="col-md-12 text-center">
+                            <p class="section-sub-title">Click sur la zone ci-dessous pour augmenter ton score :</p>
+                            <div id="clickArea">
+                                <a class="btn btn-outline-primary btn-lg" >Cliquez ici</a>
+                            </div>
+                            
+                            <p id="score">Score: <span id="scoreValue">0</span></p>
+                 
+
+                            
+
+                        </div>                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>	
+
+<!-- Activité Section-->
+<section id="features" class="bg-white">
+    <div class="container">
+        <div class="section-content">
+                       
+            <h2 class="section-title" align="center">Amélioration</h2>
+            <br>
+            <p class="section-sub-title" align="center">Ci-dessous vous pourrez trouvez des améliorations :</p>
+
+            <br><br>
+                
+                <div class="col-md-10 offset-md-1 features-holder">
+                    <div class="row">
+                        
+                        <div class="col-md-4 col-sm-12 text-center mt-4">
+                            <div class="shadow rounded feature-item p-4 mb-4" ="fade-up">
+                                <div class="my-4">
+                                    <i class="lnr lnr-user fs-40"></i>
+                                </div>
+                                <p id="autoClickers">Auto Clickers: <span id="autoClickersValue">0</span></p>
+                                <button class="btn btn-primary btn-shadow btn-lg" id="autoClickerButton" type="submit" name="submit" onclick="buyAutoClicker()">Auto Clicker (10 points)</button>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-earth fs-40"></i>
+                                </div>
+                                <h4>MMO</h4>
+                                <p>Ça nous arrive de faire des MMO, les derniers en date Blade and Soul, Guild wars 2, Teso.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded feature-item p-4 mb-4" >
+                                <div class="my-4">
+                                    <i class="lnr lnr-users fs-40"></i>
+                                </div>
+                                <p id="clickMultiplier">Click Multiplier: <span id="clickMultiplierValue">1</span></p>
+                                <button class="btn btn-primary btn-shadow btn-lg" id="clickMultiplierButton" type="submit" name="submit" onclick="buyClickMultiplier()">Multiplier (50 points)</button>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-code fs-40"></i>
+                                </div>
+                                <h4>Game Dev</h4>
+                                <p>Des lives développement de divers jeux, si vous voulez papoter de ce domaine, vous êtes le bienvenu !</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-12 text-center mt-4">
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-eye fs-40"></i>
+                                </div>
+                                <h4>VR</h4>
+                                <p>Et oui on fait de la VR et de tout ! Comme Beat Saber, VRchat, Half-Life Alyx...</p>
+                            </div>
+                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
+                                <div class="my-4">
+                                    <i class="lnr lnr-pencil fs-40"></i>
+                                </div>
+                                <h4>ART</h4>
+                                <p>De temps en temps, de l'infographie 2D/3D, ou même quelque emotes</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <br><br>
+
+                <div class="col-md-12 text-center">
+                    <h2 class="section-title" align="center">Objectifs</h2>
+                    <div id="goals-container">
+                        <div id="goal-list"></div>
+                        <div id="progress-bars"></div>
+                    </div>
+                </div>
+                
+                <script src="js/script.js"></script>
+                        
+        </div>
+    </div>
+</section>
+
+<!-- Twitch Section-->
+<section id="cta" class="bg-fixed overlay" style="background-image: url(img/bg.jpg);">
+    <div class="container">
+        <div class="section-content" >
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="mb-2">N'hésitez pas à passer nous faire un coucou !</h2>
+                    <br>
+                    <a class="btn btn-outline-primary btn-lg" href="https://www.twitch.tv/gangdesgueux">TWITCH</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+
+<!-- Footer-->
+<footer class="mastfoot my-3">
+    <div class="inner container">
+         <div class="row">
+         	<div class="col-lg-4 col-md-12 d-flex align-items-center">
+         		
+         	</div>
+         	<div class="col-lg-4 col-md-12 d-flex align-items-center">
+         		<p class="mx-auto text-center mb-0">&copy; 2024 GangDesGueux - Tous droits réservés</a></p>
+         	</div>
+           
+            <div class="col-lg-4 col-md-12">
+            	<nav class="nav nav-mastfoot justify-content-center">
+	                <a class="nav-link" href="https://www.twitch.tv/gangdesgueux"  target="_blank">
+	                	<i class="fab fa-twitch"></i>
+	                </a>	
+                    <a class="nav-link" href="https://discord.gg/vn3BzcnD9M"  target="_blank">
+	                	<i class="fab fa-discord"></i>
+	                </a>                    
+	                <a class="nav-link" href="#"  target="_blank" hidden>
+	                	<i class="fab fa-youtube"></i>
+	                </a>
+	            </nav>
+            </div>            
+        </div>
+    </div>    
+</footer>	
+
+
+<!-- External JS -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+	<script src="vendor/bootstrap/popper.min.js"></script>
+	<script src="vendor/bootstrap/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js "></script>
+	<script src="vendor/owlcarousel/owl.carousel.min.js"></script>
+	<script src="vendor/stellar/jquery.stellar.js" type="text/javascript" charset="utf-8"></script>
+	<script src="vendor/isotope/isotope.min.js"></script>
+	<script src="vendor/lightcase/lightcase.js"></script>
+	<script src="vendor/waypoints/waypoint.min.js"></script>
+	 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+</body>
+</html>

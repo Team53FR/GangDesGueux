@@ -214,7 +214,7 @@
     <div class="section-content">
         <div class="title-wrap" >
             <h2 class="section-title">Nos Jeux</h2>
-            <p class="section-sub-title">Et voici une petite liste de nos jeux, oui il y a de tout mais pas de rien. <br> La liste peu évolué ! <br> <b><s>Barré</s> : Jeu terminé</b></p>
+            <p class="section-sub-title">Et voici une petite liste de nos jeux, oui il y a de tout mais pas de rien. <br> La liste peu évolué ! <br> <b><span style="color: red;">Jeu terminé</span></b></p>
         </div>
         
         <div class="row text-center">
@@ -226,10 +226,10 @@
                 <h5 class="mb-4">Solo</h5>
 		    <select>
                         <!-- Jeux non barrés -->
-                        <option value="Beat Saber">Hogwards Legacy</option>
-                        <option value="Half-Life : Alyx">Assassin's Creed Odyssey</option>
-                        <option value="VRchat">SAO : FB / LS / HR</option>
-                        <option value="Rec Room">Satisfactory</option>
+                        <option>Hogwards Legacy</option>
+                        <option>Assassin's Creed Odyssey</option>
+                        <option>SAO : FB / LS / HR</option>
+                        <option>Satisfactory</option>
 
                         <!-- Séparation visuelle -->
                         <option disabled>─────────────</option>
@@ -246,7 +246,20 @@
                     <i class="lnr lnr-bug fs-40"></i>
                 </div>
                 <h5 class="mb-4">Co-op</h5>
-                <p>Sengoku Dynasty <br>Sons Of The Forest <br>We Were Here <br><s>Escape The Backroom</s><br>PvZ: Battle Neighborville </p>
+		    <select>
+                        <!-- Jeux non barrés -->
+                        <option>Sengoku Dynasty</option>
+                        <option>Sons Of The Forest</option>
+                        <option>We Were Here</option>
+                        <option>PvZ: Battle Neighborville</option>
+			<option>Gears of War</option>
+
+                        <!-- Séparation visuelle -->
+                        <option disabled>─────────────</option>
+
+                        <!-- Jeux terminés (barrés) -->
+                        <option class="completed" >Escape The Backroom</option>
+                    </select>
             </div>
 
             <div class="col-md-3 col-sm-8" >
@@ -254,7 +267,15 @@
                     <i class="lnr lnr-users fs-40"></i>
                 </div>
                 <h5 class="mb-4">Quotidiens</h5>
-                <p>Valorant <br>Fortnite <br>Rocket League <br>Genshin Impact <br>Honkai Star Rail <br>Super Animal Royal</p>
+		    <select>
+                        <!-- Jeux non barrés -->
+                        <option>Valorant</option>
+                        <option>Fortnite</option>
+                        <option>Rocket League</option>
+                        <option>Genshin Impact</option>
+			<option>Honkai Star Rail</option>
+			<option>Super Animal Royal</option>
+                    </select>
             </div>
 
             <div class="col-md-3 col-sm-8" >
@@ -264,19 +285,12 @@
                 <h5 class="mb-4">VR</h5>
 		    <select>
                         <!-- Jeux non barrés -->
-                        <option value="Beat Saber">Beat Saber</option>
-                        <option value="Half-Life : Alyx">Half-Life : Alyx</option>
-                        <option value="VRchat">VRchat</option>
-                        <option value="Rec Room">Rec Room</option>
-
-                        <!-- Séparation visuelle -->
-                        <option disabled>─────────────</option>
-
-                        <!-- Jeux terminés (barrés) -->
-                        <option class="completed" value="SuperHot VR">SuperHot VR</option>
-                        <option class="completed" value="The Climb">The Climb</option>
+                        <option >Beat Saber</option>
+                        <option >Half-Life : Alyx</option>
+                        <option >VRchat</option>
+                        <option >SuperHot VR</option>
+			<option >The Climb</option>
                     </select>
-                <p>Beat Saber <br>Half-Life : Alyx <br>VRchat <br>Rec Room </p>
             </div>
 
         </div>

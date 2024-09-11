@@ -836,7 +836,7 @@ section {
         /* Style pour barrer les éléments */
         option.completed {
             text-decoration: line-through;
-            color: gray;
+            color: red;
         }
 
         /* Style pour la séparation */

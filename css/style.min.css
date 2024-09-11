@@ -795,3 +795,63 @@ section {
     font-size: 16px; } }
 
 /*=====  End of RESPONSIVE  ======*/
+
+/* Style pour la liste déroulante */
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            appearance: none; /* Retire la flèche par défaut sur certains navigateurs */
+            -webkit-appearance: none; /* Pour Safari/Chrome */
+            -moz-appearance: none; /* Pour Firefox */
+            position: relative;
+            padding-right: 30px; /* Espace pour la flèche personnalisée */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Flèche personnalisée pour la liste déroulante */
+        select:after {
+            content: "▼";
+            font-size: 14px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        /* Style pour les options */
+        option {
+            padding: 10px;
+            background-color: #fff;
+            color: #333;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Style pour barrer les éléments */
+        option.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        /* Style pour la séparation */
+        option.separator {
+            font-weight: bold;
+            color: #666;
+            background-color: #f0f0f0;
+        }
+
+        /* Style au survol de la liste déroulante */
+        select:hover {
+            border-color: #007BFF;
+        }
+
+        /* Amélioration du survol des options */
+        select option:hover {
+            background-color: #f1f1f1;
+        }

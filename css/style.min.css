@@ -101,30 +101,64 @@ section {
 .shadow {
   box-shadow: 0 10px 30px 0 rgba(67, 80, 98, 0.24), 0 2px 4px 0 rgba(67, 80, 98, 0.1) !important; }
 
-#header-navbar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 11;
-  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86); }
-
-.navbar-brand {
-  font-size: 40px;
-  color: #000; }
-
-.navbar-nav .nav-link {
-  color: #fff;
-  transition: .3s ease; }
-
-.navbar-nav:hover li a {
-  opacity: 0.5; }
+  #header-navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 11;
+    transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86); 
+    background-color: rgba(0, 0, 0, 0.336); /* Fond noir avec transparence */
+    backdrop-filter: blur(5px); /* Flou pour améliorer la lisibilité */
+  }
+  
+  /* Style de la marque (nom du site) */
+  .navbar-brand {
+    font-size: 40px;
+    color: #fff; /* Couleur blanche pour être visible sur fond sombre */
+  }
+  
+  /* Liens de navigation */
+  .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.2em; 
+    padding: 10px 20px; /* Espacement autour du texte */
+    margin: 5px 0;   /* Marges pour espacer les éléments */
+    transition: all 0.3s ease;
+  }
+  
+  /* Effet au survol pour les liens */
+  .navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Fond semi-transparent au survol */
+    border-radius: 5px;   /* Bords arrondis */
+    color: #fff;          /* Couleur du texte au survol */
+    text-decoration: none; /* Pas de soulignement */
+  }
+  
+  /* Menu responsive : centrer et ajuster le padding en mobile */
+  @media (max-width: 768px) {
+    .navbar-nav .nav-link {
+      text-align: center;  /* Centrer le texte en mode mobile */
+      display: block;      /* Affichage en bloc */
+      padding: 15px;       /* Plus de padding */
+    }
+  }
+  
+  /* Effet de survol pour le texte du menu avec opacité */
   .navbar-nav:hover li a:hover {
-    opacity: 1; }
-
-.navbar-toggler {
-  font-size: 2rem;
-  color: #fff; }
+    opacity: 1; 
+  }
+  
+  /* Style du bouton burger en mobile */
+  .navbar-toggler {
+    font-size: 2rem;
+    color: #fff; /* Couleur blanche pour le bouton burger */
+  }
+  
+  /* Réduire l'opacité des liens quand on survole la liste */
+  .navbar-nav:hover li a {
+    opacity: 0.5; 
+  }
 
 .jumbotron {
   color: #fff;

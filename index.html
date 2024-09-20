@@ -105,95 +105,40 @@
         <div class="section-content">
             
 
-            <!-- Fenetre Stream Section
             <div align="center">
+                <div id="twitch-embed" style="border-radius: 15px; overflow: hidden;"></div>                
+                <script src="https://embed.twitch.tv/embed/v1.js"></script>
+                
+                <script type="text/javascript">
+                    new Twitch.Embed("twitch-embed", 
+                    {
+                        width:"100%",
+                        height: 480,
+                        channel: "GangDesGueux"
+                    });
+                </script>
+            </div>
+
+            <div align="center"></div>
                 <div id="twitch-embed"></div>                
                 <script src="https://embed.twitch.tv/embed/v1.js"></script>
                 
                 <script type="text/javascript">
                     new Twitch.Embed("twitch-embed", 
                     {
-                        width: 854,
+                        width:"100%",
                         height: 480,
-                        channel: "GangDesGueux"
+                        channel: "Graou_Didine"
                     });
                 </script>
-            </div>-->
-            
-
-            <div class="title-wrap mb-5" >
-                <h2 class="section-title">
-                    Que faisons-nous ?
-                </h2>
-                <p class="section-sub-title">Et oui "nous ", car on est deux, Shin et moi-même. ( GangDesGueux, TeamTeam, baguette..... et plein d'autres ) <br> Bref voici nos genres d'activité</p>
-            </div>
-            
-            
-            <div class="row">                
-                <div class="col-md-10 offset-md-1 features-holder">
-                    <div class="row">
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" ="fade-up">
-                                <div class="my-4">
-                                    <i class="lnr lnr-user fs-40"></i>
-                                </div>
-                                <h4>Solo</h4>
-                                <p>Des petits jeux solo pour des let's play chill, comme par exemple Avatar, Stray, Kena...</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-earth fs-40"></i>
-                                </div>
-                                <h4>MMO</h4>
-                                <p>Ça nous arrive de faire des MMO, les derniers en date Blade and Soul, Guild wars 2, Teso.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center">
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-users fs-40"></i>
-                                </div>
-                                <h4>Multi</h4>
-                                <p>Des jeux avec les copains pour plus de fun, sur tout et n'importe quel jeu, humour garantit !</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-code fs-40"></i>
-                                </div>
-                                <h4>Game Dev</h4>
-                                <p>Des lives développement de divers jeux, si vous voulez papoter de ce domaine, vous êtes le bienvenu !</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-eye fs-40"></i>
-                                </div>
-                                <h4>VR</h4>
-                                <p>Et oui on fait de la VR et de tout ! Comme Beat Saber, VRchat, Half-Life Alyx...</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-pencil fs-40"></i>
-                                </div>
-                                <h4>ART</h4>
-                                <p>De temps en temps, de l'infographie 2D/3D, ou même quelque emotes</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>                
             </div>
 
             <div class="title-wrap">
-                <br>
                 <h2 class="section-title">Plus <b>d'Info</b> ?</h2>
                 <p class="section-sub-title">Si vous voulez en savoir plus, nous vous invitons à vous renseigner dans "À Propos" !</p>
                 <br>
                 <a class="btn btn-link" href="about.html" role="button">À PROPOS</a>
+                <br><br>
             </div>
 
         </div>

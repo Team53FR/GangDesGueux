@@ -1,78 +1,376 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        GangDesGueux - Clicker Baguette
-    </title>
-    <meta name="description">
-    
-    
+    <title>GangDesGueux — Jeu</title>
+    <meta name="description" content="Jeu de déduction — Trouvez le meurtrier parmi 1000 prénoms">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- External CSS -->
     <link rel="icon" href="img/Logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="img/Logo.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="vendor/select2/select2.min.css">
-    <link rel="stylesheet" href="vendor/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="vendor/lightcase/lightcase.css">
-     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
 
-    <!-- Modernizr JS for IE8 support of HTML5 elements and media queries -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Fichier des prénoms — modifiez prenoms.js pour changer la liste -->
+    <script src="prenoms.js"></script>
+
+    <style>
+        /* ── Variables du thème ────────────────────────────── */
+        :root {
+            --gdg-accent: #7b2ff7;
+            --gdg-accent-light: #9d5ff9;
+            --gdg-dark: #0d0d0d;
+            --gdg-card-bg: rgba(255, 255, 255, 0.04);
+            --gdg-card-border: rgba(255, 255, 255, 0.10);
+            --gdg-text: #e8e8e8;
+            --gdg-text-muted: #888;
+            --gdg-grey-bg: rgba(255, 255, 255, 0.06);
+            --gdg-radius: 10px;
+        }
+
+        /* ── Layout général ────────────────────────────────── */
+        body.static-layout { background: var(--gdg-dark); }
+
+        .game-page {
+            padding: 2rem 0 4rem;
+            color: var(--gdg-text);
+        }
+
+        .game-page h1 {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.25rem;
+        }
+
+        .game-page .subtitle {
+            font-size: 0.95rem;
+            color: var(--gdg-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* ── Carte générique ────────────────────────────────── */
+        .g-card {
+            background: var(--gdg-card-bg);
+            border: 1px solid var(--gdg-card-border);
+            border-radius: var(--gdg-radius);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .g-card-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gdg-accent-light);
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* ── Grille des indices ─────────────────────────────── */
+        .clues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.6rem;
+        }
+
+        .clue-item {
+            background: rgba(123, 47, 247, 0.08);
+            border: 1px solid rgba(123, 47, 247, 0.25);
+            border-radius: 8px;
+            padding: 0.65rem 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .clue-num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gdg-accent-light);
+            min-width: 18px;
+            padding-top: 2px;
+        }
+
+        .clue-text {
+            font-size: 0.85rem;
+            color: var(--gdg-text);
+            line-height: 1.4;
+        }
+
+        /* ── Zone d'accusation ──────────────────────────────── */
+        .accusation-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .ac-wrap {
+            flex: 1;
+            position: relative;
+        }
+
+        .ac-wrap input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--gdg-card-border);
+            border-radius: 8px;
+            padding: 0.6rem 0.9rem;
+            color: var(--gdg-text);
+            font-size: 0.9rem;
+            font-family: 'Lato', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .ac-wrap input:focus {
+            outline: none;
+            border-color: var(--gdg-accent);
+        }
+
+        .ac-wrap input::placeholder { color: var(--gdg-text-muted); }
+
+        .ac-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0; right: 0;
+            background: #1a1a1a;
+            border: 1px solid var(--gdg-card-border);
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .ac-dropdown.open { display: block; }
+
+        .ac-item {
+            padding: 0.5rem 0.9rem;
+            font-size: 0.85rem;
+            color: var(--gdg-text);
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+
+        .ac-item:hover { background: rgba(123, 47, 247, 0.2); }
+
+        .btn-gdg {
+            background: var(--gdg-accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s, opacity 0.2s;
+        }
+
+        .btn-gdg:hover { background: var(--gdg-accent-light); }
+        .btn-gdg:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        .btn-gdg-outline {
+            background: transparent;
+            color: var(--gdg-accent-light);
+            border: 1px solid var(--gdg-accent);
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-gdg-outline:hover { background: rgba(123, 47, 247, 0.15); }
+
+        /* ── Tentatives (dots) ──────────────────────────────── */
+        .attempts-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .att-label {
+            font-size: 0.75rem;
+            color: var(--gdg-text-muted);
+            margin-right: 0.25rem;
+        }
+
+        .att-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .att-dot.fail { background: #c0392b; border-color: #e74c3c; }
+        .att-dot.win  { background: #27ae60; border-color: #2ecc71; }
+
+        /* ── Feedback ───────────────────────────────────────── */
+        .feedback-bar {
+            border-radius: 8px;
+            padding: 0.65rem 1rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.85rem;
+            display: none;
+        }
+
+        .feedback-bar.active { display: block; }
+        .feedback-bar.ok  { background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.4); color: #2ecc71; }
+        .feedback-bar.err { background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.4); color: #e74c3c; }
+        .feedback-bar.info{ background: rgba(123,47,247,0.12); border: 1px solid rgba(123,47,247,0.35); color: var(--gdg-accent-light); }
+
+        /* ── Tableau des suspects ───────────────────────────── */
+        .suspects-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .suspects-meta .left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-count {
+            font-size: 0.7rem;
+            background: rgba(123,47,247,0.2);
+            border: 1px solid rgba(123,47,247,0.3);
+            color: var(--gdg-accent-light);
+            border-radius: 20px;
+            padding: 2px 10px;
+        }
+
+        .suspects-meta .right {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-input {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--gdg-card-border);
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.82rem;
+            color: var(--gdg-text);
+            font-family: 'Lato', sans-serif;
+            width: 160px;
+        }
+
+        .filter-input:focus { outline: none; border-color: var(--gdg-accent); }
+        .filter-input::placeholder { color: var(--gdg-text-muted); }
+
+        .hint-legend {
+            font-size: 0.72rem;
+            color: var(--gdg-text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .hint-legend span { color: #2ecc71; }
+
+        /* ── Grille des prénoms ─────────────────────────────── */
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 4px;
+        }
+
+        .name-chip {
+            padding: 5px 6px;
+            border-radius: 6px;
+            border: 1px solid var(--gdg-card-border);
+            font-size: 0.78rem;
+            cursor: pointer;
+            color: var(--gdg-text);
+            background: rgba(255,255,255,0.03);
+            text-align: center;
+            user-select: none;
+            transition: background 0.12s, color 0.12s, opacity 0.12s;
+            line-height: 1.3;
+        }
+
+        .name-chip:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.07); }
+
+        .name-chip.greyed {
+            opacity: 0.3;
+            text-decoration: line-through;
+            background: transparent;
+            border-color: rgba(255,255,255,0.06);
+            color: var(--gdg-text-muted);
+        }
+
+        /* ── Responsive ─────────────────────────────────────── */
+        @media (max-width: 576px) {
+            .clues-grid { grid-template-columns: 1fr 1fr; }
+            .names-grid  { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+            .accusation-row { flex-direction: column; }
+            .btn-gdg { width: 100%; }
+        }
+    </style>
 </head>
 
-
-<!-- Header-->
 <body class="static-layout">
-	<nav id="header-navbar" class="navbar navbar-expand-lg py-4">
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav id="header-navbar" class="navbar navbar-expand-lg py-4">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center text-white" href="index.html">
             <h3 class="font-weight-bolder mb-0">GangDesGueux</h3>
         </a>
-        <button class="navbar-toggler" type="button" aria-controls="navbar-nav-header" aria-expanded="false" aria-label="Toggle navigation" data-toggle="collapse" data-target="#navbar-nav-header" >
+        <button class="navbar-toggler" type="button"
+                aria-controls="navbar-nav-header" aria-expanded="false"
+                aria-label="Toggle navigation"
+                data-toggle="collapse" data-target="#navbar-nav-header">
             <span class="lnr lnr-menu"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar-nav-header">
-            <ul class="navbar-nav ml-auto" align="right">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">À Propos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="affiliation.html">Affiliation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="jeu.html">Jeu</a>
-                </li>
-                <li class="nav-item" hidden>
-                    <a class="nav-link" href="contact.html">Contact</a>
-                </li>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">À Propos</a></li>
+                <li class="nav-item"><a class="nav-link" href="affiliation.html">Affiliation</a></li>
+                <li class="nav-item active"><a class="nav-link" href="jeu.html">Jeu</a></li>
             </ul>
         </div>
-        
     </div>
 </nav>
 
-
-<!-- Banniere-->
-<div class="jumbotron jumbotron-single d-flex align-items-center">
+<!-- ── Bannière ─────────────────────────────────────────────── -->
+<div class="jumbotron d-flex align-items-center" style="min-height:220px">
     <div class="container text-center">
-      <h1 class="display-2 mb-4">Clicker Baguette</h1>
+        <h1 class="display-3 mb-2">Qui est le meurtrier ?</h1>
+        <p class="lead" style="color:rgba(255,255,255,0.65)">
+            Analysez les indices, éliminez les suspects et découvrez le coupable
+        </p>
     </div>
     <div class="rectangle-1"></div>
     <div class="rectangle-2"></div>
@@ -80,208 +378,408 @@
     <div class="rectangle-transparent-2"></div>
     <div class="circle-1"></div>
     <div class="circle-2"></div>
-    <div class="circle-3"></div>
-    <div class="triangle triangle-1">
-        <img src="img/obj_triangle.png" alt="">
-    </div>
-    <div class="triangle triangle-2">
-        <img src="img/obj_triangle.png" alt="">
-    </div>
-    <div class="triangle triangle-3">
-        <img src="img/obj_triangle.png" alt="">
-    </div>
-    <div class="triangle triangle-4">
-        <img src="img/obj_triangle.png" alt="">
-    </div>
-  </div>
-
-
-
-<!-- Présentation du jeu Section-->
-<section id="features" class="bg-white">
-    <div class="container">
-        <div class="section-content">                    
-
-            <div class="title-wrap mb-5" >
-
-                <h2 class="section-title">Clicker Baguette</h2>
-                <br>
-                <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit" onclick="resetGame()">Réinitialiser</button>
-            </div>
-            
-        </div>
-    </div>
-</section>
-
-
-<!-- Discord Section-->
-<section id="section-featurettes" class="featurettes overlay bg-fixed" style="background-image: url(img/hexa.jpg);">
-    <div class="container">
-        <div class="section-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row align-items-center text-white">
-                        
-                        <div class="col-md-12 text-center">
-                            <p class="section-sub-title">Click sur la zone ci-dessous pour augmenter ton score :</p>
-                            <div id="clickArea">
-                                <a class="btn btn-outline-primary btn-lg" >Cliquez ici</a>
-                            </div>
-                            
-                            <p id="score">Score: <span id="scoreValue">0</span></p>
-                 
-
-                            
-
-                        </div>                       
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>	
-
-<!-- Activité Section-->
-<section id="features" class="bg-white">
-    <div class="container">
-        <div class="section-content">
-                       
-            <h2 class="section-title" align="center">Amélioration</h2>
-            <br>
-            <p class="section-sub-title" align="center">Ci-dessous vous pourrez trouvez des améliorations :</p>
-
-            <br><br>
-                
-                <div class="col-md-10 offset-md-1 features-holder">
-                    <div class="row">
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" ="fade-up">
-                                <div class="my-4">
-                                    <i class="lnr lnr-user fs-40"></i>
-                                </div>
-                                <p id="autoClickers">Auto Clickers: <span id="autoClickersValue">0</span></p>
-                                <button class="btn btn-primary btn-shadow btn-lg" id="autoClickerButton" type="submit" name="submit" onclick="buyAutoClicker()">Auto Clicker (10 points)</button>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-earth fs-40"></i>
-                                </div>
-                                <h4>MMO</h4>
-                                <p>Ça nous arrive de faire des MMO, les derniers en date Blade and Soul, Guild wars 2, Teso.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center">
-                            <div class="shadow rounded feature-item p-4 mb-4" >
-                                <div class="my-4">
-                                    <i class="lnr lnr-users fs-40"></i>
-                                </div>
-                                <p id="clickMultiplier">Click Multiplier: <span id="clickMultiplierValue">1</span></p>
-                                <button class="btn btn-primary btn-shadow btn-lg" id="clickMultiplierButton" type="submit" name="submit" onclick="buyClickMultiplier()">Multiplier (50 points)</button>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-code fs-40"></i>
-                                </div>
-                                <h4>Game Dev</h4>
-                                <p>Des lives développement de divers jeux, si vous voulez papoter de ce domaine, vous êtes le bienvenu !</p>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 text-center mt-4">
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-eye fs-40"></i>
-                                </div>
-                                <h4>VR</h4>
-                                <p>Et oui on fait de la VR et de tout ! Comme Beat Saber, VRchat, Half-Life Alyx...</p>
-                            </div>
-                            <div class="shadow rounded feature-item p-4 mb-4" hidden>
-                                <div class="my-4">
-                                    <i class="lnr lnr-pencil fs-40"></i>
-                                </div>
-                                <h4>ART</h4>
-                                <p>De temps en temps, de l'infographie 2D/3D, ou même quelque emotes</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <br><br>
-
-                <div class="col-md-12 text-center">
-                    <h2 class="section-title" align="center">Objectifs</h2>
-                    <div id="goals-container">
-                        <div id="goal-list"></div>
-                        <div id="progress-bars"></div>
-                    </div>
-                </div>
-                
-                <script src="js/script.js"></script>
-                        
-        </div>
-    </div>
-</section>
-
-<!-- Twitch Section-->
-<section id="cta" class="bg-fixed overlay" style="background-image: url(img/bg.jpg);">
-    <div class="container">
-        <div class="section-content" >
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2 class="mb-2">N'hésitez pas à passer nous faire un coucou !</h2>
-                    <br>
-                    <a class="btn btn-outline-primary btn-lg" href="https://www.twitch.tv/gangdesgueux">TWITCH</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 </div>
 
+<!-- ── Jeu ──────────────────────────────────────────────────── -->
+<section class="game-page">
+    <div class="container">
 
-<!-- Footer-->
+        <!-- Indices -->
+        <div class="g-card">
+            <div class="g-card-title">
+                <i class="fas fa-search"></i> Indices de l'enquête
+            </div>
+            <div class="clues-grid" id="clues-grid"></div>
+        </div>
+
+        <!-- Accusation -->
+        <div class="g-card">
+            <div class="g-card-title" style="justify-content:space-between">
+                <span><i class="fas fa-crosshairs"></i> Votre accusation</span>
+                <div class="attempts-row" style="margin-top:0">
+                    <span class="att-label">Tentatives :</span>
+                    <div id="att-dots" style="display:flex;gap:5px"></div>
+                </div>
+            </div>
+
+            <div class="feedback-bar" id="feedback"></div>
+
+            <div class="accusation-row">
+                <div class="ac-wrap">
+                    <input type="text" id="guess-input"
+                           placeholder="Tapez le prénom du meurtrier..."
+                           autocomplete="off" aria-label="Prénom du suspect"/>
+                    <div class="ac-dropdown" id="ac-dropdown" role="listbox"></div>
+                </div>
+                <button class="btn-gdg" id="btn-accuser">Accuser</button>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:0.75rem">
+                <button class="btn-gdg-outline" id="btn-new" style="display:none">
+                    <i class="fas fa-redo" style="margin-right:5px"></i>Nouvelle partie
+                </button>
+            </div>
+        </div>
+
+        <!-- Tableau des suspects -->
+        <div class="g-card">
+            <div class="suspects-meta">
+                <div class="left">
+                    <div class="g-card-title" style="margin-bottom:0">
+                        <i class="fas fa-users"></i> Suspects
+                    </div>
+                    <span class="badge-count" id="badge-count">— suspects</span>
+                </div>
+                <div class="right">
+                    <input type="text" class="filter-input" id="filter-input"
+                           placeholder="Rechercher..." aria-label="Filtrer les prénoms"/>
+                    <button class="btn-gdg-outline" id="btn-reset-grey" style="white-space:nowrap">
+                        Tout remettre
+                    </button>
+                </div>
+            </div>
+            <p class="hint-legend">
+                Clic sur un prénom pour le griser / le réactiver — à vous de déduire qui reste possible !
+            </p>
+            <div class="names-grid" id="names-grid"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
 <footer class="mastfoot my-3">
     <div class="inner container">
-         <div class="row">
-         	<div class="col-lg-4 col-md-12 d-flex align-items-center">
-         		
-         	</div>
-         	<div class="col-lg-4 col-md-12 d-flex align-items-center">
-         		<p class="mx-auto text-center mb-0">&copy; 2024 GangDesGueux - Tous droits réservés</a></p>
-         	</div>
-           
+        <div class="row">
+            <div class="col-lg-4 col-md-12 d-flex align-items-center"></div>
+            <div class="col-lg-4 col-md-12 d-flex align-items-center">
+                <p class="mx-auto text-center mb-0">&copy; 2025 GangDesGueux — Tous droits réservés</p>
+            </div>
             <div class="col-lg-4 col-md-12">
-            	<nav class="nav nav-mastfoot justify-content-center">
-	                <a class="nav-link" href="https://www.twitch.tv/gangdesgueux"  target="_blank">
-	                	<i class="fab fa-twitch"></i>
-	                </a>	
-                    <a class="nav-link" href="https://discord.gg/vn3BzcnD9M"  target="_blank">
-	                	<i class="fab fa-discord"></i>
-	                </a>                    
-	                <a class="nav-link" href="#"  target="_blank" hidden>
-	                	<i class="fab fa-youtube"></i>
-	                </a>
-	            </nav>
-            </div>            
+                <nav class="nav nav-mastfoot justify-content-center">
+                    <a class="nav-link" href="https://www.twitch.tv/gangdesgueux" target="_blank">
+                        <i class="fab fa-twitch"></i>
+                    </a>
+                    <a class="nav-link" href="https://discord.gg/vn3BzcnD9M" target="_blank">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </nav>
+            </div>
         </div>
-    </div>    
-</footer>	
+    </div>
+</footer>
 
+<!-- ── Scripts ──────────────────────────────────────────────── -->
+<script src="vendor/bootstrap/popper.min.js"></script>
+<script src="vendor/bootstrap/bootstrap.min.js"></script>
 
-<!-- External JS -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-	<script src="vendor/bootstrap/popper.min.js"></script>
-	<script src="vendor/bootstrap/bootstrap.min.js"></script>
-	<script src="vendor/select2/select2.min.js "></script>
-	<script src="vendor/owlcarousel/owl.carousel.min.js"></script>
-	<script src="vendor/stellar/jquery.stellar.js" type="text/javascript" charset="utf-8"></script>
-	<script src="vendor/isotope/isotope.min.js"></script>
-	<script src="vendor/lightcase/lightcase.js"></script>
-	<script src="vendor/waypoints/waypoint.min.js"></script>
-	 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+/* ============================================================
+   LOGIQUE DU JEU
+   Les prénoms sont chargés depuis prenoms.js (window.PRENOMS_DATA)
+   ============================================================ */
+
+(function () {
+
+    /* ── Récupération des données ─────────────────────────── */
+    if (!window.PRENOMS_DATA || !window.PRENOMS_DATA.length) {
+        document.getElementById("names-grid").innerHTML =
+            '<p style="color:#e74c3c">Erreur : le fichier prenoms.js est introuvable ou vide.</p>';
+        return;
+    }
+
+    const RAW = window.PRENOMS_DATA;
+    /* Dédoublonnage par nom (insensible à la casse) */
+    const seen = new Set();
+    const PRENOMS = RAW.filter(p => {
+        const k = p.nom.toLowerCase();
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+    });
+
+    const MAX_ATT = 6;
+    const VOYELLES = new Set("aeiouyéèêëàâùûîïôAEIOUYÉÈÊËÀÂÙÛÎÏÔ");
+
+    /* ── Helpers ──────────────────────────────────────────── */
+    function countVowels(s) {
+        return [...s].filter(c => VOYELLES.has(c)).length;
+    }
+
+    function genreLabel(g) {
+        return g === "M" ? "masculin" : g === "F" ? "féminin" : "mixte/neutre";
+    }
+
+    function randomFrom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    /* ── Construction des 6 indices ──────────────────────── */
+    function buildClues(entry) {
+        const nom   = entry.nom;
+        const genre = entry.genre;
+        const len   = nom.length;
+        const first = nom[0].toUpperCase();
+        const last  = nom[nom.length - 1].toUpperCase();
+        const vowels = countVowels(nom);
+
+        /* lettre présente (ni première ni dernière) */
+        const mids = [...nom.slice(1, -1)];
+        const midLetter = mids.length > 0
+            ? randomFrom(mids).toUpperCase()
+            : first;
+
+        /* lettre absente */
+        const absents = "abcdefghijklmnopqrstuvwxyz"
+            .split("")
+            .filter(c => !nom.toLowerCase().includes(c));
+        const absentLetter = absents.length > 0
+            ? randomFrom(absents).toUpperCase()
+            : null;
+
+        return [
+            {
+                text: `Le prénom est ${genreLabel(genre)}`,
+                fn: n => {
+                    const e = PRENOMS.find(p => p.nom.toLowerCase() === n.toLowerCase());
+                    return e ? e.genre === genre : false;
+                }
+            },
+            {
+                text: `Il contient ${len} lettres`,
+                fn: n => n.length === len
+            },
+            {
+                text: `Il commence par la lettre "${first}"`,
+                fn: n => n[0].toUpperCase() === first
+            },
+            {
+                text: `Il se termine par la lettre "${last}"`,
+                fn: n => n[n.length - 1].toUpperCase() === last
+            },
+            {
+                text: `Il contient la lettre "${midLetter}"`,
+                fn: n => n.toUpperCase().includes(midLetter)
+            },
+            absentLetter
+                ? {
+                    text: `Il ne contient pas la lettre "${absentLetter}"`,
+                    fn: n => !n.toUpperCase().includes(absentLetter)
+                  }
+                : {
+                    text: `Il possède ${vowels} voyelle${vowels > 1 ? "s" : ""}`,
+                    fn: n => countVowels(n) === vowels
+                  }
+        ];
+    }
+
+    /* ── État de la partie ───────────────────────────────── */
+    let secret, clues, greyed, attempts, gameOver, filterVal;
+
+    function newGame() {
+        secret   = randomFrom(PRENOMS);
+        clues    = buildClues(secret);
+        greyed   = new Set();
+        attempts = 0;
+        gameOver = false;
+        filterVal = "";
+
+        document.getElementById("filter-input").value = "";
+        document.getElementById("guess-input").value  = "";
+        document.getElementById("btn-accuser").disabled = false;
+        document.getElementById("btn-new").style.display = "none";
+
+        hideFeedback();
+        renderClues();
+        renderDots();
+        renderNames();
+    }
+
+    /* ── Rendu des indices ───────────────────────────────── */
+    function renderClues() {
+        const grid = document.getElementById("clues-grid");
+        grid.innerHTML = "";
+        clues.forEach((c, i) => {
+            const div = document.createElement("div");
+            div.className = "clue-item";
+            div.innerHTML = `<span class="clue-num">${i + 1}</span>
+                             <span class="clue-text">${c.text}</span>`;
+            grid.appendChild(div);
+        });
+    }
+
+    /* ── Rendu des points de tentatives ──────────────────── */
+    function renderDots() {
+        const wrap = document.getElementById("att-dots");
+        wrap.innerHTML = "";
+        for (let i = 0; i < MAX_ATT; i++) {
+            const d = document.createElement("div");
+            d.className = "att-dot";
+            if (i < attempts) {
+                /* le dernier point affiché en vert si on vient de gagner */
+                const isWin = gameOver && i === attempts - 1
+                              && document.getElementById("btn-new").style.display !== "none"
+                              && document.getElementById("feedback").classList.contains("ok");
+                d.classList.add(isWin ? "win" : "fail");
+            }
+            wrap.appendChild(d);
+        }
+    }
+
+    /* ── Rendu de la grille de prénoms ───────────────────── */
+    function renderNames() {
+        const grid  = document.getElementById("names-grid");
+        const f     = filterVal.toLowerCase();
+        const shown = PRENOMS.filter(p => !f || p.nom.toLowerCase().includes(f));
+
+        grid.innerHTML = "";
+        shown.forEach(p => {
+            const chip = document.createElement("div");
+            const isGreyed = greyed.has(p.nom.toLowerCase());
+
+            chip.className = "name-chip" + (isGreyed ? " greyed" : "");
+            chip.textContent = p.nom;
+            chip.title = isGreyed ? "Cliquer pour réactiver" : "Cliquer pour griser";
+
+            chip.addEventListener("click", () => {
+                const key = p.nom.toLowerCase();
+                if (greyed.has(key)) greyed.delete(key);
+                else greyed.add(key);
+                renderNames();
+            });
+
+            grid.appendChild(chip);
+        });
+
+        const remaining = shown.length - shown.filter(p => greyed.has(p.nom.toLowerCase())).length;
+
+        document.getElementById("badge-count").textContent =
+            shown.length + " affiché" + (shown.length > 1 ? "s" : "")
+            + " · " + remaining + " non éliminé" + (remaining > 1 ? "s" : "");
+    }
+
+    /* ── Feedback ────────────────────────────────────────── */
+    function showFeedback(msg, type) {
+        const el = document.getElementById("feedback");
+        el.textContent = msg;
+        el.className = "feedback-bar active " + type;
+    }
+
+    function hideFeedback() {
+        document.getElementById("feedback").className = "feedback-bar";
+    }
+
+    /* ── Accusation ──────────────────────────────────────── */
+    function accuse() {
+        if (gameOver) return;
+        const val = document.getElementById("guess-input").value.trim();
+        if (!val) { showFeedback("Tapez un prénom avant d'accuser !", "info"); return; }
+
+        const match = PRENOMS.find(p => p.nom.toLowerCase() === val.toLowerCase());
+        if (!match) {
+            showFeedback("Ce prénom n'est pas dans la liste des suspects !", "info");
+            return;
+        }
+
+        attempts++;
+
+        if (match.nom.toLowerCase() === secret.nom.toLowerCase()) {
+            /* Victoire */
+            gameOver = true;
+            /* le dernier dot passe en vert */
+            const dots = document.querySelectorAll("#att-dots .att-dot");
+            if (dots[attempts - 1]) {
+                dots[attempts - 1].className = "att-dot win";
+            }
+            showFeedback(
+                `Bravo ! Le meurtrier était bien ${secret.nom} — `
+                + `trouvé en ${attempts} tentative${attempts > 1 ? "s" : ""} !`,
+                "ok"
+            );
+            document.getElementById("btn-accuser").disabled = true;
+            document.getElementById("btn-new").style.display = "inline-block";
+
+        } else {
+            renderDots();
+            if (attempts >= MAX_ATT) {
+                gameOver = true;
+                showFeedback(
+                    `Perdu ! Le meurtrier était ${secret.nom}. Lancez une nouvelle partie !`,
+                    "err"
+                );
+                document.getElementById("btn-accuser").disabled = true;
+                document.getElementById("btn-new").style.display = "inline-block";
+            } else {
+                showFeedback(
+                    `"${match.nom}" n'est pas le meurtrier. `
+                    + `Il vous reste ${MAX_ATT - attempts} tentative${MAX_ATT - attempts > 1 ? "s" : ""}.`,
+                    "err"
+                );
+            }
+        }
+
+        document.getElementById("guess-input").value = "";
+        document.getElementById("ac-dropdown").classList.remove("open");
+    }
+
+    /* ── Autocomplete ────────────────────────────────────── */
+    const guessInput  = document.getElementById("guess-input");
+    const acDropdown  = document.getElementById("ac-dropdown");
+
+    guessInput.addEventListener("input", () => {
+        const v = guessInput.value.toLowerCase().trim();
+        acDropdown.innerHTML = "";
+        if (!v) { acDropdown.classList.remove("open"); return; }
+
+        const hits = PRENOMS
+            .filter(p => p.nom.toLowerCase().startsWith(v))
+            .slice(0, 10);
+
+        if (!hits.length) { acDropdown.classList.remove("open"); return; }
+
+        hits.forEach(p => {
+            const item = document.createElement("div");
+            item.className = "ac-item";
+            item.textContent = p.nom;
+            item.role = "option";
+            item.addEventListener("mousedown", () => {
+                guessInput.value = p.nom;
+                acDropdown.classList.remove("open");
+            });
+            acDropdown.appendChild(item);
+        });
+
+        acDropdown.classList.add("open");
+    });
+
+    guessInput.addEventListener("keydown", e => {
+        if (e.key === "Enter") accuse();
+        if (e.key === "Escape") acDropdown.classList.remove("open");
+    });
+
+    document.addEventListener("click", e => {
+        if (!e.target.closest(".ac-wrap")) acDropdown.classList.remove("open");
+    });
+
+    /* ── Boutons ─────────────────────────────────────────── */
+    document.getElementById("btn-accuser").addEventListener("click", accuse);
+    document.getElementById("btn-new").addEventListener("click", newGame);
+
+    document.getElementById("btn-reset-grey").addEventListener("click", () => {
+        greyed.clear();
+        renderNames();
+    });
+
+    document.getElementById("filter-input").addEventListener("input", e => {
+        filterVal = e.target.value;
+        renderNames();
+    });
+
+    /* ── Démarrage ───────────────────────────────────────── */
+    newGame();
+
+})();
+</script>
+
 </body>
 </html>
